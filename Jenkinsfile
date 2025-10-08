@@ -17,9 +17,10 @@ pipeline {
                 script {
                     echo "Building the Docker image..."
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-credential', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        sh 'docker build -t shodiq12/demo-app-app:jma-2.0 .'
+                        // Perhatikan: nama repo sudah benar
+                        sh 'docker build -t shodiq12/demo-app:jma-2.0 .'
                         sh "echo \$PASS | docker login -u \$USER --password-stdin"
-                        sh 'docker push shodiq12/demo-app-app:jma-2.0'
+                        sh 'docker push shodiq12/demo-app:jma-2.0'
                     }
                 }
             }
